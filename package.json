@@ -1,0 +1,33 @@
+{
+  "name": "@richardx/express-middleware",
+  "version": "0.0.0",
+  "description": "Collection of useful express middleware.",
+  "main": "dist/index.js",
+  "author": "Richard Xiong",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "4.6.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express-async-errors": "^3.1.1",
+    "morgan": "^1.10.0"
+  },
+  "scripts": {
+    "prepare": "yarn build",
+    "build": "tsc",
+    "generate": "prisma generate --schema=./schema.prisma"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.14",
+    "@types/morgan": "^1.9.3",
+    "prisma": "4.6.1"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "@prisma/client": "^4.6.1",
+    "prisma": "^4.6.1"
+  }
+}
