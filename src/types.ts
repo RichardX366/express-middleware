@@ -1,3 +1,5 @@
+import { CookieParseOptions } from 'cookie-parser';
+
 declare module 'http' {
   interface IncomingMessage {
     rawBody: Buffer;
@@ -15,4 +17,6 @@ declare module 'express-serve-static-core' {
 export interface Options {
   handlePrismaErrors?: boolean;
   maxBodySize?: string;
+  cookieSecret?: string;
+  cookieOptions?: CookieParseOptions;
 }
