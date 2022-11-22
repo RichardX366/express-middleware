@@ -5,7 +5,7 @@ An opinionated set of middleware to use on an express API.
 ## Use
 
 ```ts
-import attachMiddleware from '@richardx/express-middleware';
+import attachMiddleware from '@rx-express-middleware';
 const app = express();
 attachMiddleware(app, {
   handlePrismaErrors: boolean | undefined; // Enable if using prisma (catches prisma errors nicely)
@@ -19,4 +19,4 @@ Formatting functions are provided through import
 
 ## Prisma Pagination
 
-Pagination can be imported through `@richardx/express-middleware/prismaPagination`
+Pagination can be imported through `rx-express-middleware/prismaPagination`

@@ -1,5 +1,5 @@
 {
-  "name": "@richardx/express-middleware",
+  "name": "rx-express-middleware",
   "version": "0.0.0",
   "description": "Collection of useful express middleware.",
   "main": "dist/index.js",
