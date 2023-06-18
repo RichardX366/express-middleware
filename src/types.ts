@@ -1,11 +1,5 @@
 import { CookieParseOptions } from 'cookie-parser';
 
-declare module 'http' {
-  interface IncomingMessage {
-    rawBody: Buffer;
-  }
-}
-
 declare module 'express-serve-static-core' {
   interface Request {
     // query where only string values are present (the rest are removed)

@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response } from 'express';
+import { RequestHandler } from 'express';
 
-export const queries = (req: Request, res: Response, next: NextFunction) => {
+export const queries: RequestHandler = (req, res, next) => {
   req.stringQuery = Object.fromEntries(
     Object.entries(req.query).filter(
       ([, value]) => typeof value === 'string' && value !== '',
