@@ -33,10 +33,6 @@ const handlePrismaError: ErrorRequestHandler = (e, req, res) => {
     return error(`The specified ${model} does not exist.`);
   }
 
-  if (msg.includes('NotFoundError')) {
-    return error(`No ${unPascalCase(msg.split(' ')[2])} was found.`);
-  }
-
   error(msg);
 };
 
