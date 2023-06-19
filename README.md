@@ -10,6 +10,8 @@ const app = express();
 attachMiddleware(app, {
   handlePrismaErrors: boolean | undefined; // Enable if using prisma (catches prisma errors nicely)
   maxBodySize: string | undefined; // Max body size (default: 50mb)
+  cookieSecret: string | undefined; // Secret for cookie parser
+  cookieOptions: CookieParseOptions | undefined; // Cookie options
 } | undefined);
 ```
 
