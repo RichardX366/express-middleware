@@ -41,12 +41,10 @@ const handlePrismaError: ErrorRequestHandler = (e, req, res) => {
   error(msg);
 };
 
-const handleError =
+export const handleError =
   (options?: { prisma?: boolean }): ErrorRequestHandler =>
   (error, req, res, next) => {
     console.error(error.stack);
     if (options?.prisma) return handlePrismaError(error, req, res, next);
     return res.status(400).send(error.message);
   };
-
-export default handleError;

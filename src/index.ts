@@ -6,7 +6,6 @@ import cookieParser from 'cookie-parser';
 import { config as initEnv } from 'dotenv';
 import { Options } from './types';
 import { queries } from './queries';
-import handleError from './error';
 
 initEnv();
 
@@ -25,12 +24,8 @@ const attachMiddleware = (app: Express, options?: Options) => {
   app.use(queries);
   app.use(morgan('dev'));
   app.use(cookieParser(options?.cookieSecret, options?.cookieOptions));
-  app.use(
-    handleError({
-      prisma: options?.handlePrismaErrors,
-    }),
-  );
 };
 
 export * from './formatting';
+export * from './error';
 export default attachMiddleware;
