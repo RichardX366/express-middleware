@@ -9,8 +9,11 @@ declare module 'express-serve-static-core' {
 }
 
 export interface Options {
-  handlePrismaErrors?: boolean;
   maxBodySize?: string;
   cookieSecret?: string;
   cookieOptions?: CookieParseOptions;
+}
+
+export interface ErrorHandlingOptions {
+  prisma?: boolean; // Handle Prisma errors
 }

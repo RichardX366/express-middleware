@@ -1,5 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { ErrorRequestHandler } from 'express';
+import { ErrorHandlingOptions } from './types';
 
 const unPascalCase = (str: string) =>
   str.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
@@ -42,7 +43,7 @@ const handlePrismaError: ErrorRequestHandler = (e, req, res) => {
 };
 
 export const handleError =
-  (options?: { prisma?: boolean }): ErrorRequestHandler =>
+  (options?: ErrorHandlingOptions): ErrorRequestHandler =>
   (error, req, res, next) => {
     console.error(error.stack);
     if (options?.prisma) return handlePrismaError(error, req, res, next);
