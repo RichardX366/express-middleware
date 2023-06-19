@@ -6,9 +6,7 @@ const unPascalCase = (str: string) =>
   str.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
 
 const handlePrismaError: ErrorRequestHandler = (e, req, res) => {
-  const model = unPascalCase(
-    e.message?.split('.') ? e.message.split('.')[1] : '',
-  );
+  const model = unPascalCase(e.message?.split('.')?.at(1) || '');
   const msg = e.message || '';
   const error = (msg: string) => res.status(400).send(msg);
 
