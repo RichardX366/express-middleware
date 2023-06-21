@@ -11,7 +11,9 @@ const isValidCode = (code: any) =>
 const handlePrismaError: ErrorRequestHandler = (e, req, res) => {
   const model = unPascalCase(e.message?.split('.')?.at(1) || '');
   const message = e.message || '';
-  const error = (msg: string) => res.status(400).send(msg);
+  const error = (msg: string, code?: number) => {
+    res.status(code || 400).json(msg);
+  };
 
   if (e instanceof Prisma.PrismaClientKnownRequestError) {
     if (e.code === 'P2014') {
@@ -19,26 +21,13 @@ const handlePrismaError: ErrorRequestHandler = (e, req, res) => {
         `Sorry, you cannot delete this ${model} as there are things connected to it. If you want to, you will need to delete the connected things first.`,
       );
     }
+
+    if (e.code === 'P2025') {
+      return error(`The specified ${model} does not exist.`, 404);
+    }
   }
 
-  if (
-    message.match('Unique|delete()|update()') &&
-    message.includes('Argument id: Got invalid value')
-  ) {
-    return error(`You must provide a valid ${model} ID.`);
-  }
-
-  if (
-    message.includes(
-      'An operation failed because it depends on one or more records that were required but not found.',
-    )
-  ) {
-    return error(`The specified ${model} does not exist.`);
-  }
-
-  res
-    .status(isValidCode(e?.cause?.message) ? +e?.cause?.message : 400)
-    .send(message);
+  error(message, isValidCode(e?.cause?.message) ? +e?.cause?.message : 400);
 };
 
 export const handleError =
