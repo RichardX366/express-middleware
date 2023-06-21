@@ -6,11 +6,7 @@ const unPascalCase = (str: string) =>
   str.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
 
 const isValidCode = (code: any) =>
-  typeof code === 'number' &&
-  isFinite(code) &&
-  Math.floor(code) === code &&
-  code >= 100 &&
-  code <= 599;
+  isFinite(code) && Math.floor(code) === code && code >= 100 && code <= 599;
 
 const handlePrismaError: ErrorRequestHandler = (e, req, res) => {
   const model = unPascalCase(e.message?.split('.')?.at(1) || '');
@@ -40,15 +36,17 @@ const handlePrismaError: ErrorRequestHandler = (e, req, res) => {
     return error(`The specified ${model} does not exist.`);
   }
 
-  res.status(isValidCode(e.cause) ? (e.cause as number) : 400).send(message);
+  res
+    .status(isValidCode(e?.cause?.message) ? +e?.cause?.message : 400)
+    .send(message);
 };
 
 export const handleError =
   (options?: ErrorHandlingOptions): ErrorRequestHandler =>
-  (error: Error, req, res, next) => {
+  (error, req, res, next) => {
     console.error(error.stack);
     if (options?.prisma) return handlePrismaError(error, req, res, next);
     return res
-      .status(isValidCode(error.cause) ? (error.cause as number) : 400)
-      .send(error.message);
+      .status(isValidCode(error?.cause?.message) ? +error?.cause?.message : 400)
+      .send(error?.message || 'Error');
   };

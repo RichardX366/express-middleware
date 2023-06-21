@@ -25,7 +25,7 @@ app.use(handleError({
 If you want to specify a specific error code, you can set the error cause to it. For example:
 
 ```ts
-throw new Error('unauthenticated', { cause: 401 });
+throw new Error('unauthenticated', { cause: new Error('401') });
 ```
 
 ## Formatting
