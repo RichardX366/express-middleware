@@ -20,6 +20,14 @@ app.use(handleError({
 }))
 ```
 
+## Error Handling
+
+If you want to specify a specific error code, you can set the error cause to it. For example:
+
+```ts
+throw new Error('unauthenticated', { cause: 401 });
+```
+
 ## Formatting
 
 Formatting functions are provided through import
