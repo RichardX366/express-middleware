@@ -6,7 +6,7 @@ const unPascalCase = (str: string) =>
   str.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
 
 const isValidCode = (code: any) =>
-  isFinite(code) && Math.floor(code) === code && code >= 100 && code <= 599;
+  isFinite(code) && Math.floor(code) === +code && code >= 100 && code <= 599;
 
 const handlePrismaError: ErrorRequestHandler = (e, req, res) => {
   const model = unPascalCase(e.message?.split('.')?.at(1) || '');
@@ -20,10 +20,6 @@ const handlePrismaError: ErrorRequestHandler = (e, req, res) => {
       return error(
         `Sorry, you cannot delete this ${model} as there are things connected to it. If you want to, you will need to delete the connected things first.`,
       );
-    }
-
-    if (e.code === 'P2025') {
-      return error(`The specified ${model} does not exist.`, 404);
     }
   }
 
