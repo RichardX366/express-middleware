@@ -31,5 +31,8 @@
   "peerDependencies": {
     "@prisma/client": "^4.6.1",
     "prisma": "^4.6.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
