@@ -13,13 +13,6 @@ const attachMiddleware = (app: Express, options?: Options) => {
   const maxBodySize = options?.maxBodySize || '50mb';
 
   app.use(json({ limit: maxBodySize }));
-  app.use(
-    urlencoded({
-      limit: maxBodySize,
-      extended: true,
-      parameterLimit: 50000,
-    }),
-  );
   app.use(cors());
   app.use(queries);
   app.use(morgan('dev'));
